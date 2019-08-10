@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="../styles/layout.css" media="screen"/>
+    <script>
+        function showPic(whichpic){
+            if(!document.getElementById("placeholder")) return false;
+            if(!document.getElementById("description")) return false;
+
+            var source = whichpic.getAttribute("href");
+            var placeHolder = document.getElementById("placeholder");
+            if(placeHolder.nodeName != "IMG") return false;
+            placeHolder.setAttribute("src",source);
+            var text = whichpic.getAttribute("title");
+            var desciption = document.getElementById("description");
+            desciption.firstChild.nodeValue = text;
+
+            return true;
+        }
+
+        function prepareGallery(){
+            if(!document.getElementsByName) return false;
+            if(!document.getElementById) return false;
+            if(!document.getElementById("imagegallery")) return false;
+            var gallery = document.getElementById("imagegallery");
+            var links = gallery.getElementsByTagName("a");
+            for (var i=0; i < links.length; i++) {
+                links[i].onclick = function(){
+                    return showPic(this) ? false: true;
+                }
+                // links[i].onkeypress = links[i].onclick;
+            }
+        }
+
+        function addLoadEvent(func){
+            var oldonload = window.onload;
+            if( typeof window.onload != 'function'){
+                window.onload= func;
+            } else{
+                window.onload = function(){
+                    oldonload();
+                    func();
+                }
+            }
+        }
+
+        addLoadEvent(prepareGallery);
+    </script>
+</head>
+<body>
+<h1>Snapshots</h1>
+<ul id="imagegallery">
+    <li>
+<!--        if return true, the browser will open new target window-->
+        <a href="../images/fireworks.jpg" title="A fireworks display">Fireworks</a>
+    </li>
+    <li>
+        <a href="../images/coffee.jpg" title="A cup of black coffee">Coffee</a>
+    </li>
+    <li>
+        <a href="../images/rose.jpg" title="A red, red rose">Rose</a>
+    </li>
+    <li>
+        <a href="../images/bigben.jpg" title="The famous clock">Big Ben</a>
+    </li>
+</ul>
+<img id="placeholder" src="../images/placeholder.gif" alt="my image gallery"/>
+<p id="description">Choose an image</p>
+</body>
+</html>
