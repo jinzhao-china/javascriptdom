@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="../styles/layout.css" media="screen"/>
+    <script>
+        function showPic(whichpic){
+            var source = whichpic.getAttribute("href");
+            var placeHolder = document.getElementById("placeholder");
+            placeHolder.setAttribute("src",source);
+            var text = whichpic.getAttribute("title");
+            var desciption = document.getElementById("description");
+            desciption.firstChild.nodeValue = text;
+        }
+    </script>
+</head>
+<body>
+<h1>Snapshots</h1>
+<ul>
+    <li>
+<!--        if return true, the browser will open new target window-->
+        <a href="../images/fireworks.jpg" title="A fireworks display" onclick="showPic(this);return false;">Fireworks</a>
+    </li>
+    <li>
+        <a href="../images/coffee.jpg" title="A cup of black coffee" onclick="showPic(this);return false;">Coffee</a>
+    </li>
+    <li>
+        <a href="../images/rose.jpg" title="A red, red rose" onclick="showPic(this);return false;">Rose</a>
+    </li>
+    <li>
+        <a href="../images/bigben.jpg" title="The famous clock" onclick="showPic(this);return false;">Big Ben</a>
+    </li>
+</ul>
+<img id="placeholder" src="../images/placeholder.gif" alt="my image gallery"/>
+<p id="description">Choose an image</p>
+</body>
+</html>
